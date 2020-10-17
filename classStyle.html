@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .static{
+            color: red;
+        }
+        .active{
+            color: rgb(45, 160, 79);
+        }
+        .text-danger{
+            color: blue;
+        }
+        .bar{
+            color: red;
+        }
+        .boo{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div v-bind:class="{ active: isActive }"></div> -->
+    <!-- <div
+        class="static"
+        v-bind:class="{ active: isActive, 'text-danger': hasError }"
+    >123456</div> -->
+    <!-- <div
+        class="static"
+        v-bind:class="classObject1"
+    >456798</div>
+
+    <div id="classStyle" v-bind:class="classObject2">789798</div>
+    <div id="classStyle1" v-bind:class="[activeClass, errorClass]">789456</div> -->
+    <!-- 三元表达式 -->
+    <!-- <div v-bind:class="[isActive ? activeClass : '', errorClass]"></div> -->
+    <!-- 这样写将始终添加 errorClass，但是只有在 isActive 是 truthy[1] 时才添加 activeClass。
+    不过，当有多个条件 class 时这样写有些繁琐。所以在数组语法中也可以使用对象语法： -->
+    <!-- <div v-bind:class="[{ active: isActive }, errorClass]"></div> -->
+        <!-- <div id="app1">
+            <my-component  class="baz boo"></my-component>
+        </div> -->
+        <div id="app1" :style="{color:color}">
+            <!-- <my-component  class="baz boo"></my-component> -->
+123
+        </div>
+       
+                 
+    <script>
+        // var vm = new Vue({
+        //     el:".static",
+        //     // data:{
+        //     //     isActive: true,
+        //     //      hasError: true
+        //     // }
+        //     data:{
+        //         classObject1:{
+        //             active: true,
+        //             'text-danger': true
+        //         }
+        //     }
+        // })
+        // var vm1 = new Vue({
+        //     el:"#classStyle",
+        //     data:{
+        //         isActive: true,
+        //         error: null
+        //     },
+        //     computed: {
+        //         classObject2: function () {
+        //             return {
+        //             active: this.isActive && !this.error,
+        //             'text-danger': this.error && this.error.type === 'fatal'
+        //             }
+        //         }
+        //     }
+        // })
+        // var vm2 = new Vue({
+        //     el:"#classStyle1",
+        //     data:{
+        //         activeClass: 'active',
+        //         errorClass: 'text-danger'
+        //     },
+         
+        // })
+        // Vue.component('my-component', {
+        //     template: '<p class="foo bar">Hi</p>'
+        // })
+        // //组件一定要在实例声明之前进行声明，并且组件只能放在实例里进行使用
+        // var vm = new Vue({
+        //     el:"#app1",
+        // })
+        var vm = new Vue({
+            el:"#app1",
+            data:{
+               color:"red"
+            }
+        })
+
+      
+    </script>
+</body>
+</html>

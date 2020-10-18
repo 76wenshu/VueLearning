@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example-1">
+        <button v-on:click="counter += 1">Add 1</button>
+        <p>The button above has been clicked {{ counter }} times.</p>
+    </div>
+    <div id="example-2">
+        <!-- `greet` 是在下面定义的方法名 -->
+        <button v-on:click="greet">Greet</button>
+    </div>
+    <div id="example-3">
+        <button v-on:click="say('hi')">Say hi</button>
+        <button v-on:click="say('what')">Say what</button>
+        <button v-on:click="warn('Form cannot be submitted yet.', $event)">
+            Submit
+          </button>
+      </div>
+      <!-- 为什么在 HTML 中监听事件？
+你可能注意到这种事件监听的方式违背了关注点分离 (separation of concern) 这个长期以来的优良传统。但不必担心，因为所有的 Vue.js 事件处理方法和表达式都严格绑定在当前视图的 ViewModel 上，它不会导致任何维护上的困难。实际上，使用 v-on 有几个好处：
+
+扫一眼 HTML 模板便能轻松定位在 JavaScript 代码里对应的方法。
+
+因为你无须在 JavaScript 里手动绑定事件，你的 ViewModel 代码可以是非常纯粹的逻辑，和 DOM 完全解耦，更易于测试。
+
+当一个 ViewModel 被销毁时，所有的事件处理器都会自动被删除。你无须担心如何清理它们。 -->
+    <script>
+        var example1 = new Vue({
+            el: '#example-1',
+            data: {
+                counter: 0
+            }
+        })
+        var example2 = new Vue({
+            el: '#example-2',
+            data: {
+                name: 'Vue.js'
+            },
+            // 在 `methods` 对象中定义方法
+            methods: {
+                greet: function (event) {
+                // `this` 在方法里指向当前 Vue 实例
+                alert('Hello ' + this.name + '!')
+                // `event` 是原生 DOM 事件
+                    if (event) {
+                        alert(event.target.tagName)
+                    }
+                },
+               
+            }
+        })
+        var example3 = new Vue({
+            el: '#example-3',
+            methods: {
+                say: function (message) {
+                 alert(message)
+                },
+                warn: function (message, event) {
+                    console.log(event)
+                    // 现在我们可以访问原生事件对象
+                    if (event) {
+                    event.preventDefault()
+                    }
+                    alert(message)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

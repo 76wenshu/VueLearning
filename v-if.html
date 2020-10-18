@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id='app'>
+        <h1 v-if="awesome">Vue is awesome!</h1>
+        <h1 v-else>Oh no 😢</h1>
+        <div v-if="type === 'A'">
+            A
+          </div>
+          <div v-else-if="type === 'B'">
+            B
+          </div>
+          <div v-else-if="type === 'C'">
+            C
+          </div>
+          <div v-else>
+            Not A/B/C
+          </div>
+          <!-- 在vue中加载的过程中是能少加载就能加载不存在重新渲染，所以要引进Key -->
+          <!-- <template v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username">
+          </template>
+          <template v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address">
+          </template>
+          <button @click="showhideClick">切换登录方式</button> -->
+          <!-- 这样也不总是符合实际需求，所以 Vue 为你提供了一种方式来表达“这两个元素是完全独立的，不要复用它们”。只需添加一个具有唯一值的 key attribute 即可： -->
+          <template v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username" key="username-input">
+          </template>
+          <template v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address" key="email-input">
+          </template>
+          <button @click="showhideClick">切换登录方式</button>
+          <!-- v-if和v-show之间的区别 -->
+          <!-- v-if 是“真正”的条件渲染，因为它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。
+v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。
+相比之下，v-show 就简单得多——不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS 进行切换。
+一般来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要非常频繁地切换，则使用 v-show 较好；
+如果在运行时条件很少改变，则使用 v-if 较好。 -->
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                awesome:Math.random() > 0.5,
+                type:"D",
+                loginType:'username'
+            },
+            methods: {
+                showhideClick: function(){
+                    this.loginType === 'username'?this.loginType = '': this.loginType = 'username'
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

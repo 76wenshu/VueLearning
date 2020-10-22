@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    
+<div id="app">
+    <component v-bind:is="whichcomp"></component>
+    <button v-on:click="choosencomp('a')">a</button>
+    <button v-on:click="choosencomp('b')">b</button>
+    <button v-on:click="choosencomp('c')">c</button>
+</div>
+    
+    <script>
+//         在动态组件上使用 keep-alive
+// 我们之前曾经在一个多标签的界面中使用 is attribute 来切换不同的组件：
+
+// <component v-bind:is="currentTabComponent"></component>
+
+//做一个包含列表组件
+//需要给组件创建props--"todos",用于存放组件通过绑定prop --"todo"获取实例中的data数据"todolists"
+ 
+var app=new Vue({
+  el: '#app',
+	components:{
+		acomp:{template:`<p>这里是组件A</p>`},
+		bcomp:{ template:`<p>这里是组件B</p>`},
+		ccomp:{template:`<p>这里是组件C</p>`}
+    },
+	data:{
+        whichcomp:""
+    },
+	methods:{
+	   choosencomp:function(x){
+	   this.whichcomp=x+"comp"}
+   }
+})
+
+    </script>
+</body>
+</html>
